@@ -20,19 +20,22 @@ attr_accessor :students
   end	
 
   def self.scrape_profile_page(profile_url)
-    student_profile = {}
-    html = open(profile_url)
-    profile = Nokogiri::HTML(html)
-    profile.css("div.main-wrapper.profile .social-icon-container a").each do |social|
-      if social.attribute("href").value.include?("twitter")
-        student_profile[:twitter] = social.attribute("href").value
-      elsif social.attribute("href").value.include?("linkedin")
-        student_profile[:linkedin] = social.attribute("href").value
-      elsif social.attribute("href").value.include?("github")
-        student_profile[:github] = social.attribute("href").value
+    s profile_html = open(profile_url)
+    profile_doc = Nokogiri::HTML(profile_html)
+    attributes = {}
+    profile_doc.css("div.social-icon-container a").each do |link_xml|
+      case link_xml.attribute("href").value
+      when /twitter/
+        attributes[:twitter] = link_xml.attribute("href").value
+      when /github/
+        attributes[:github] = link_xml.attribute("href").value
+      when /linkedin/
+        attributes[:linkedin] = link_xml.attribute("href").value
       else
-        student_profile[:blog] = social.attribute("href").value
+          attributes[:blog] = link_xml.attribute("href").value
       end
-    end 
-  end
+    end
+    attributes[:profile_quote] = profile_doc.css("div.profile-quote").text
+    attributes[:bio] = profile_doc.css("div.bio-content div.description-holder").text.strip
+    attributes
 end
