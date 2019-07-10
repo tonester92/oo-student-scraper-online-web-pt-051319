@@ -20,7 +20,6 @@ attr_accessor :students
     students
    end
 
-
   def self.scrape_profile_page(profile_url)
     profile_html = open(profile_url)
     profile_doc = Nokogiri::HTML(profile_html)
