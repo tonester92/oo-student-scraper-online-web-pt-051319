@@ -32,7 +32,7 @@ attr_accessor :students
       when /linkedin/
         student_attributes[:linkedin] = link_xml.attribute("href").value
       else
-          student_attributes[:blog] = link_xml.attribute("href").value
+        student_attributes[:blog] = link_xml.attribute("href").value
       end
     end
    student_attributes[:profile_quote] = profile_doc.css("div.profile-quote").text
