@@ -25,7 +25,7 @@ attr_accessor :students
     profile_doc = Nokogiri::HTML(profile_html)
     attributes = {}
     profile_doc.css("div.social-icon-container a").each do |link_xml|
-      case link_xml.student_attribute("href").value
+      case link_xml.attribute("href").value
       when /twitter/
         attributes[:twitter] = link_xml.attribute("href").value
       when /github/
