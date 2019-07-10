@@ -23,7 +23,7 @@ attr_accessor :students
   def self.scrape_profile_page(profile_url)
     profile_html = open(profile_url)
     profile_doc = Nokogiri::HTML(profile_html)
-    student_attributes = {}
+    attributes = {}
     profile_doc.css("div.social-icon-container a").each do |link_xml|
       case link_xml.student_attribute("href").value
       when /twitter/
