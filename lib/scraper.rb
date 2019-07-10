@@ -37,5 +37,4 @@ attr_accessor :students
     attributes[:profile_quote] = profile_doc.css("div.profile-quote").text
     attributes[:bio] = profile_doc.css("div.bio-content div.description-holder").text.strip
     attributes
-  end
 end
