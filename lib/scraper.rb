@@ -12,10 +12,10 @@ attr_accessor :students
       name = student.css(".student-name").text
       location = student.css(".student-location").text
       profile_url = student.css("a").attribute("href").value
-      student_info = {:name => name,
+      student_infomation = {:name => name,
                 :location => location,
                 :profile_url => profile_url}
-      students << student_info
+      students << student_infomation
       end
     students
    end
